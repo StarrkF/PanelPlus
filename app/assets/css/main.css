@@ -1,4 +1,73 @@
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes: light --default, night, dracula, lemonade, cupcake, bumblebee, emerald, corporate, synthwave, halloween;
+
+@theme {
+  /* Shadcn UI Zinc Palette */
+  --color-background: #ffffff;
+  --color-foreground: #09090b;
+
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #71717a;
+
+  --color-popover: #ffffff;
+  --color-popover-foreground: #09090b;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #09090b;
+
+  --color-border: #e4e4e7;
+  --color-input: #e4e4e7;
+
+  --color-primary: #18181b;
+  --color-primary-foreground: #fafafa;
+
+  --color-secondary: #f4f4f5;
+  --color-secondary-foreground: #18181b;
+
+  --color-accent: #f4f4f5;
+  --color-accent-foreground: #18181b;
+
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #fafafa;
+
+  --color-ring: #18181b;
+
+  --radius: 0.5rem;
+}
+
+/* Dark mode overrides for custom variables */
+[data-theme='dark'] {
+  --color-background: #09090b;
+  --color-foreground: #fafafa;
+
+  --color-muted: #27272a;
+  --color-muted-foreground: #a1a1aa;
+
+  --color-popover: #09090b;
+  --color-popover-foreground: #fafafa;
+
+  --color-card: #09090b;
+  --color-card-foreground: #fafafa;
+
+  --color-border: #27272a;
+  --color-input: #27272a;
+
+  --color-primary: #fafafa;
+  --color-primary-foreground: #18181b;
+
+  --color-secondary: #27272a;
+  --color-secondary-foreground: #fafafa;
+
+  --color-accent: #27272a;
+  --color-accent-foreground: #fafafa;
+
+  --color-destructive: #7f1d1d;
+  --color-destructive-foreground: #fafafa;
+
+  --color-ring: #d4d4d8;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground transition-colors duration-300 antialiased;
+  }
 }
