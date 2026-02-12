@@ -13,17 +13,21 @@ export const useAuthStore = defineStore('auth', {
       this.loading = true
       this.error = null
       try {
-        const data = await $fetch('http://localhost:8080/api/auth/login', { 
+        const response = await $fetch('http://localhost:8080/api/auth/login', { 
           method: 'POST', 
           body: credentials 
         })
         
-        this.user = { username: credentials.username } // Backend dönen dataya göre güncellenebilir
-        this.token = data.token || data // API yanıt yapısına göre ayarlanmalı
-        
-        localStorage.setItem('auth_token', this.token)
-        
-        return true
+        // Backend returns ApiResponse<TokenResponse>
+        if (response.success) {
+          this.token = response.data.token
+          this.user = { username: credentials.username }
+          localStorage.setItem('auth_token', this.token)
+          return true
+        } else {
+          this.error = response.message || 'Giriş başarısız'
+          return false
+        }
       } catch (err) {
         this.error = err.data?.message || err.message || 'Giriş başarısız'
         return false
@@ -36,11 +40,21 @@ export const useAuthStore = defineStore('auth', {
       this.loading = true
       this.error = null
       try {
-        await $fetch('http://localhost:8080/api/auth/register', { 
+        const response = await $fetch('http://localhost:8080/api/auth/register', { 
           method: 'POST', 
           body: userData 
         })
-        return true
+        
+        // Backend returns ApiResponse<TokenResponse> on successful registration
+        if (response.success) {
+          this.token = response.data.token
+          this.user = { username: userData.username }
+          localStorage.setItem('auth_token', this.token)
+          return true
+        } else {
+          this.error = response.message || 'Kayıt başarısız'
+          return false
+        }
       } catch (err) {
         this.error = err.data?.message || err.message || 'Kayıt başarısız'
         return false
