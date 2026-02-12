@@ -1,0 +1,4 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, night, dracula, lemonade, cupcake, bumblebee, emerald, corporate, synthwave, halloween;
+}
