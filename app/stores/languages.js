@@ -14,7 +14,7 @@ export const useLanguageStore = defineStore('language', {
       this.loading = true
       this.error = null
       try {
-        const response = await fetchWithAuth('http://localhost:8080/api/languages')
+        const response = await fetchWithAuth('/api/languages')
         // Backend returns ApiResponse<List<LanguageDto>>
         if (response.success) {
           this.languages = response.data
@@ -33,7 +33,7 @@ export const useLanguageStore = defineStore('language', {
       this.loading = true
       this.error = null
       try {
-        const response = await fetchWithAuth('http://localhost:8080/api/languages', {
+        const response = await fetchWithAuth('/api/languages', {
           method: 'POST',
           body: languageDto
         })
@@ -58,7 +58,7 @@ export const useLanguageStore = defineStore('language', {
       this.loading = true
       this.error = null
       try {
-        const response = await fetchWithAuth(`http://localhost:8080/api/languages/${code}`, {
+        const response = await fetchWithAuth(`/api/languages/${code}`, {
           method: 'DELETE'
         })
         // Backend returns ApiResponse<Void>

@@ -39,9 +39,10 @@
       </nav>
 
       <div class="pt-4 border-t border-border">
-        <button 
+        <Button 
           @click="authStore.logout"
-          class="flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10 group relative"
+          variant="ghost"
+          class="flex w-full items-center justify-start gap-3 rounded-md px-3 py-2 text-sm font-medium text-destructive transition-colors hover:bg-destructive/10 hover:text-destructive group relative"
         >
           <LogOut class="h-4 w-4 shrink-0" />
           <span class="whitespace-nowrap transition-all duration-300" :class="{ 'opacity-0 w-0 invisible': isCollapsed }">
@@ -54,7 +55,7 @@
               Çıkış Yap
             </div>
           </div>
-        </button>
+        </Button>
       </div>
     </div>
   </aside>
@@ -76,6 +77,7 @@ import {
   Settings, 
   LogOut 
 } from 'lucide-vue-next'
+import { Button } from '@/components/ui/button'
 
 defineProps({
   isOpen: Boolean,

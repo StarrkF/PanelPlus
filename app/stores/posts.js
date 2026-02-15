@@ -13,7 +13,7 @@ export const usePostStore = defineStore('post', {
       this.loading = true
       this.error = null
       try {
-        const response = await fetchWithAuth('http://localhost:8080/api/posts')
+        const response = await fetchWithAuth('/api/posts')
         if (response.success) {
           this.posts = response.data
         } else {
@@ -31,7 +31,7 @@ export const usePostStore = defineStore('post', {
       this.loading = true
       this.error = null
       try {
-        const response = await fetchWithAuth('http://localhost:8080/api/posts', {
+        const response = await fetchWithAuth('/api/posts', {
           method: 'POST',
           body: postRequest
         })
@@ -55,7 +55,7 @@ export const usePostStore = defineStore('post', {
       this.loading = true
       this.error = null
       try {
-        const response = await fetchWithAuth(`http://localhost:8080/api/posts/${postId}/translations`, {
+        const response = await fetchWithAuth(`/api/posts/${postId}/translations`, {
           method: 'POST',
           body: translationRequest
         })
@@ -68,6 +68,29 @@ export const usePostStore = defineStore('post', {
         }
       } catch (err) {
         this.error = err.data?.message || err.message || 'Çeviri eklenemedi'
+        return false
+      } finally {
+        this.loading = false
+      }
+    },
+    
+    async addMenuToPost(postId, menuId, weight = 0) {
+      const { fetchWithAuth } = useApi()
+      this.loading = true
+      this.error = null
+      try {
+        const response = await fetchWithAuth(`/api/posts/${postId}/menus/${menuId}?weight=${weight}`, {
+          method: 'POST'
+        })
+        if (response.success) {
+          await this.fetchPosts()
+          return true
+        } else {
+          this.error = response.message || 'Menüye bağlama başarısız'
+          return false
+        }
+      } catch (err) {
+        this.error = err.data?.message || err.message || 'Menüye bağlama başarısız'
         return false
       } finally {
         this.loading = false

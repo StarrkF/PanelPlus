@@ -13,7 +13,7 @@ export const useAuthStore = defineStore('auth', {
       this.loading = true
       this.error = null
       try {
-        const response = await $fetch('http://localhost:8080/api/auth/login', { 
+        const response = await $fetch('/api/auth/login', { 
           method: 'POST', 
           body: credentials 
         })
@@ -40,7 +40,7 @@ export const useAuthStore = defineStore('auth', {
       this.loading = true
       this.error = null
       try {
-        const response = await $fetch('http://localhost:8080/api/auth/register', { 
+        const response = await $fetch('/api/auth/register', { 
           method: 'POST', 
           body: userData 
         })

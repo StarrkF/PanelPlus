@@ -10,6 +10,20 @@ export default defineNuxtConfig({
     componentDir: './app/components/ui'
   },
   css: ['~/assets/css/main.css'],
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8080'
+    }
+  },
+  nitro: {
+    devProxy: {
+      '/api': {
+        target: 'http://localhost:8080/api',
+        changeOrigin: true,
+        prependPath: true,
+      }
+    }
+  },
   vite: {
     plugins: [
       tailwindcss(),

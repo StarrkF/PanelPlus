@@ -16,23 +16,27 @@
       <nav class="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-30 w-full px-6 flex justify-between items-center h-16">
         <div class="flex items-center gap-4">
           <!-- Desktop Sidebar Toggle -->
-          <button 
+          <Button 
             v-if="authStore.isAuthenticated"
             @click="isSidebarCollapsed = !isSidebarCollapsed"
-            class="hidden lg:flex p-2 rounded-md hover:bg-accent transition-colors"
+            variant="ghost"
+            size="icon"
+            class="hidden lg:flex"
           >
             <ChevronLeft v-if="!isSidebarCollapsed" class="h-5 w-5" />
             <ChevronRight v-else class="h-5 w-5" />
-          </button>
+          </Button>
 
           <!-- Mobile Menu Toggle -->
-          <button 
+          <Button 
             v-if="authStore.isAuthenticated"
             @click="isSidebarOpen = !isSidebarOpen"
-            class="lg:hidden p-2 rounded-md hover:bg-accent transition-colors"
+            variant="ghost"
+            size="icon"
+            class="lg:hidden"
           >
             <Menu class="h-5 w-5" />
-          </button>
+          </Button>
           <NuxtLink v-if="!authStore.isAuthenticated" to="/" class="text-xl font-bold tracking-tight">PanelPlus</NuxtLink>
         </div>
 
@@ -56,6 +60,7 @@
 
 <script setup>
 import { Menu, ChevronLeft, ChevronRight } from 'lucide-vue-next'
+import { Button } from '@/components/ui/button'
 const authStore = useAuthStore()
 const isSidebarOpen = ref(false)
 const isSidebarCollapsed = ref(false)

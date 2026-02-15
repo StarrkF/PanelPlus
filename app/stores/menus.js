@@ -13,7 +13,7 @@ export const useMenuStore = defineStore('menu', {
       this.loading = true
       this.error = null
       try {
-        const response = await fetchWithAuth('http://localhost:8080/api/menus')
+        const response = await fetchWithAuth('/api/menus')
         if (response.success) {
           this.menus = response.data
         } else {
@@ -31,7 +31,7 @@ export const useMenuStore = defineStore('menu', {
       this.loading = true
       this.error = null
       try {
-        const response = await fetchWithAuth('http://localhost:8080/api/menus', {
+        const response = await fetchWithAuth('/api/menus', {
           method: 'POST',
           body: menuRequest
         })
@@ -55,7 +55,7 @@ export const useMenuStore = defineStore('menu', {
       this.loading = true
       this.error = null
       try {
-        const response = await fetchWithAuth(`http://localhost:8080/api/menus/${menuId}/translations`, {
+        const response = await fetchWithAuth(`/api/menus/${menuId}/translations`, {
           method: 'POST',
           body: translationRequest
         })
